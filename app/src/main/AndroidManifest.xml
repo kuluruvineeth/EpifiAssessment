@@ -14,7 +14,7 @@
         android:theme="@style/Theme.EpifiAssessment"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".panValidator.PanValidatorActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
