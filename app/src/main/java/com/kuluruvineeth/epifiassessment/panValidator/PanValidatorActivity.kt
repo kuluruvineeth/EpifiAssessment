@@ -36,7 +36,9 @@ class PanValidatorActivity : AppCompatActivity() {
         }
 
         et_birth_year.addTextChangedListener {
-            validateInputs()
+            if(it?.toString()!!.isNotEmpty()){
+                panValidatorViewModel.validateBirthYear(it.toString())
+            }
         }
         et_birth_month.addTextChangedListener {
             validateInputs()
@@ -44,9 +46,13 @@ class PanValidatorActivity : AppCompatActivity() {
         et_birth_date.addTextChangedListener {
             validateInputs()
         }
-        panValidatorViewModel.isValidPan.observe(this,{
+        panValidatorViewModel.isValidPan.observe(this) {
             updatePanUi(it)
-        })
+        }
+
+        panValidatorViewModel.isValidYear.observe(this) {
+            updateYearUi(it)
+        }
 
         btn_next.setOnClickListener {
             Toast.makeText(this@PanValidatorActivity,getString(R.string.submit_msg),Toast.LENGTH_LONG)
@@ -66,12 +72,18 @@ class PanValidatorActivity : AppCompatActivity() {
         when(it){
             true -> {
                 updateEditTextUi(et_pan,R.color.purple_700)
-                isPanValidated = true
             }
             false -> {
                 updateEditTextUi(et_pan,R.color.grey)
-                isPanValidated = false
             }
+        }
+        validateInputs()
+    }
+
+    private fun updateYearUi(it: Boolean){
+        when(it){
+            true -> updateEditTextUi(et_birth_year,R.color.blue)
+            false -> updateEditTextUi(et_birth_year,R.color.grey)
         }
         validateInputs()
     }
@@ -85,19 +97,9 @@ class PanValidatorActivity : AppCompatActivity() {
         }
     }
     private fun validateInputs(){
-        btn_next.isEnabled = isPanValidated &&
+        btn_next.isEnabled = panValidatorViewModel.isValidPan.value!! &&
                 (et_birth_date.length()==1 || et_birth_date.length()==2) &&
                 (et_birth_month.length()==1 || et_birth_month.length()==2) &&
-                validateBirthYear()
-    }
-
-    private fun validateBirthYear(): Boolean{
-        if(et_birth_year.text.isNotEmpty() &&
-            et_birth_year.text?.toString()?.toInt()!! in 1901..2998){
-            updateEditTextUi(et_birth_year,R.color.blue)
-            return true
-        }
-        updateEditTextUi(et_birth_year,R.color.grey)
-        return false
+                panValidatorViewModel.isValidYear.value!!
     }
 }
