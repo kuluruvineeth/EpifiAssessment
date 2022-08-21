@@ -22,3 +22,5 @@
 Initial Screen | Next Button Enabled | Once Clicked on Next | 
 --- | --- | --- |
 ![](https://github.com/kuluruvineeth/EpifiAssessment/blob/master/screenshots/img.png) | ![](https://github.com/kuluruvineeth/EpifiAssessment/blob/master/screenshots/img_1.png) | ![](https://github.com/kuluruvineeth/EpifiAssessment/blob/master/screenshots/img_2.png) |
+
+### Thank You
