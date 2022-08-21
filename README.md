@@ -11,6 +11,12 @@
 - [x] Language: Kotlin
 - [x] Use of coroutines
 
+## Built Using
+1. Activity KTX for viewModels
+2. Coroutines
+3. KTX for lifecycle scopes
+4. Hilt for Dependency Injection
+
 ## Screenshots
 
 Initial Screen | Next Button Enabled | Once Clicked on Next | 
