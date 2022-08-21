@@ -7,12 +7,12 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.viewModelScope
 import com.kuluruvineeth.epifiassessment.R
 import com.kuluruvineeth.epifiassessment.utils.InputFilterMinMax
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_pan_validator.*
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -49,9 +49,9 @@ class PanValidatorActivity : AppCompatActivity() {
         })
 
         btn_next.setOnClickListener {
-            Toast.makeText(this,getString(R.string.submit_msg),Toast.LENGTH_LONG)
+            Toast.makeText(this@PanValidatorActivity,getString(R.string.submit_msg),Toast.LENGTH_LONG)
                 .show()
-            GlobalScope.launch(Dispatchers.Main){
+            panValidatorViewModel.viewModelScope.launch(Dispatchers.Main){
                 delay(1000)
                 finish()
             }
