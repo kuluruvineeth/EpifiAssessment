@@ -73,6 +73,7 @@ class PanValidatorActivity : AppCompatActivity() {
                 isPanValidated = false
             }
         }
+        validateInputs()
     }
 
     private fun updateEditTextUi(editText: EditText,color: Int){
@@ -82,12 +83,21 @@ class PanValidatorActivity : AppCompatActivity() {
         }else{
             grad.setStroke(2,resources.getColor(color))
         }
-        validateInputs()
     }
     private fun validateInputs(){
         btn_next.isEnabled = isPanValidated &&
                 (et_birth_date.length()==1 || et_birth_date.length()==2) &&
                 (et_birth_month.length()==1 || et_birth_month.length()==2) &&
-                et_birth_year.length() == 4
+                validateBirthYear()
+    }
+
+    private fun validateBirthYear(): Boolean{
+        if(et_birth_year.text.isNotEmpty() &&
+            et_birth_year.text?.toString()?.toInt()!! in 1901..2998){
+            updateEditTextUi(et_birth_year,R.color.blue)
+            return true
+        }
+        updateEditTextUi(et_birth_year,R.color.grey)
+        return false
     }
 }
